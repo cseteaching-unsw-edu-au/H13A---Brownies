@@ -16,22 +16,26 @@
     #insert1 {
       width: 400px;
     }
+    
     </style>
   </head>
   <body class="p-3 m-0 border-0 bd-example">    
     <img width="75" height="75" src="https://media.istockphoto.com/id/1219193706/vector/vector-of-envelope-icon-in-trendy-flat-design.jpg?s=612x612&w=0&k=20&c=5DtsGAID5dFKMb2DFbtjVDke6aq7T32lPP3BUtxalJs=" <h2 style="color:blue;">INVOICE POSTIE</h2>
     <div class="mb-4">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Delivery</button>
+      <li class="nav-item" role="presentation" href="homePage.html">
+        <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="homePage.html">HomePage</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Mailbox</button>
+        <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="false">Delivery</button>
+      </li>
+      <li class="nav-item" role="presentation" href="receiveInvoicePage.html">
+        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="true">Mailbox</button>
       </li>
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Organisation</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li class="nav-item" role="presentation" href="loginRegistrationPage.html">
         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Login/Registration</button>
       </li>
       <li class="nav-item dropdown">

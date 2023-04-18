@@ -116,7 +116,7 @@ return (
     width="100" 
     height="100" 
     />
-    <h2 style={{ marginTop: "1.5%", marginLeft: "1%", display: "inline-blocks;" }}>INVOICE POSTIE</h2>
+    <h2 style={{ color: "blue", marginTop: "1.5%", marginLeft: "1%", display: "inline-blocks;" }}>INVOICE POSTIE</h2>
     </div>
 	<Router>
 	<Navbar />
