@@ -10,6 +10,4 @@ return (
 
 export default Delivery;
 
-//export default function Delivery() // {
- //   return <h1>Anout</h1>
-//}
+
