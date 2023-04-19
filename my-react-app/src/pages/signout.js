@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const SignOut = () => {
+  const [logoutStatus, setLogoutStatus] = useState('');
+
   const signout = async () => {
     try {
       const response = await axios.post("http://h10a-brownie-dev.ap-southeast-2.elasticbeanstalk.com/auth/logout");
 
       if (response.status === 200) {
         localStorage.removeItem('authToken'); // Remove the token from local storage
-        console.log('Logout successful');
+        setLogoutStatus('Logout successful');
       } else {
-        console.error('Logout failed');
+        setLogoutStatus('Logout failed');
       }
     } catch (err) {
-      console.error('Error during logout:', err);
+      setLogoutStatus('Error during logout: ' + err.message);
     }
   };
 
   return (
-    <button onClick={signout}>Logout</button>
+    <div>
+      <button onClick={signout}>Logout</button>
+      {logoutStatus && <p>{logoutStatus}</p>}
+    </div>
   );
 };
 
 export default SignOut;
+
 
