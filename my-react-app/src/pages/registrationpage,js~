@@ -1,0 +1,34 @@
+import React from 'react';
+import "./App.css";
+
+const Registration = () => {
+  return (
+    <>
+      <p className="title">Registration Form</p>
+  
+      <form className="App">
+      <div class="mb-4">
+          <label for="exampleFormControlInput1" class="form-label">Full name</label>
+          <input type="text" class="form-control border-success" id="exampleFormControlInput1" placeholder="name@example.com" />
+        </div>
+      <div class="mb-4">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control border-success" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div>
+      <div class="mb-4">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control border-success" id="exampleFormControlInput1" placeholder="name@example.com">
+        </div>
+        <input type="text"  />
+        <input type="email" />
+        <input type="password" />
+        <input type={"submit"} 
+          style={{ backgroundColor: "#a1eafb" }} />
+      </form>
+    </>
+  );
+}
+  
+export default Registration;
+
+

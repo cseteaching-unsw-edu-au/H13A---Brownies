@@ -33,7 +33,7 @@
       <li class="nav-item" role="presentation">
         <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Organisation</button>
       </li>
-      <li class="nav-item" role="presentation" href="loginRegistrationPage.html">
+      <li class="nav-item" role="presentation">
         <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Login/Registration</button>
       </li>
       <li class="nav-item dropdown">
