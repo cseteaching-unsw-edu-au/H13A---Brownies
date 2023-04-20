@@ -15,17 +15,11 @@ return (
 		<Bars />
 
 		<NavMenu>
-		<NavLink to='/home' activeStyle>
-			Home
-		</NavLink>
 		<NavLink to='/delivery' activeStyle>
 			Delivery
 		</NavLink>
 		<NavLink to='/mailbox' activeStyle>
 			Mailbox
-		</NavLink>
-		<NavLink to='notifications' activeStyle>
-			Notifications
 		</NavLink>
 		{/* Second Nav */}
 		{/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}

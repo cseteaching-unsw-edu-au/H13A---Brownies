@@ -19,11 +19,24 @@ reportWebVitals();
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-
+import './index.css';
+import { UserContext } from './pages/UserContext';
+/*
 ReactDOM.render(
 <React.StrictMode>
 	<App />
 </React.StrictMode>,
 document.getElementById('root')
 );
+*/
+const Index = () => {
+  const [userEmail, setUserEmail] = useState('');
 
+  return (
+    <UserContext.Provider value={{ userEmail, setUserEmail }}>
+      <App />
+    </UserContext.Provider>
+  );
+};
+
+ReactDOM.render(<Index />, document.getElementById('root'));
