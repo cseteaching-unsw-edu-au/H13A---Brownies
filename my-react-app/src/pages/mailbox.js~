@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Mailbox = () => {
   const [xmlStrings, setXmlStrings] = useState([]);
@@ -13,17 +13,41 @@ const Mailbox = () => {
     localStorage.setItem('xmlStrings', JSON.stringify(xmlStrings));
   }, [xmlStrings]);
 
+  const handleClear = () => {
+    localStorage.removeItem('xmlStrings');
+    setXmlStrings([]);
+  };
+
+  const [renderedHtmlStrings, setRenderedHtmlStrings] = useState([]);
+
+  useEffect(() => {
+    const fetchHtmlStrings = async () => {
+      try {
+        const promises = xmlStrings.map((xmlString) => axios.post("http://f10a-bb-rendering-api.ap-southeast-2.elasticbeanstalk.com/render/html/from_string", { data: xmlString }));
+        const responses = await Promise.all(promises);
+        const htmlStrings = responses.map((res) => res.data);
+        setRenderedHtmlStrings(htmlStrings);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchHtmlStrings();
+  }, [xmlStrings]);
+
   return (
     <div>
       <h1>Mailbox</h1>
       <ul>
-        {xmlStrings.map((xmlString, index) => (
-          <li key={index}>{xmlString}</li>
+        {renderedHtmlStrings.map((htmlString, index) => (
+          <li key={index} dangerouslySetInnerHTML={{ __html: htmlString }} />
         ))}
       </ul>
+      <button onClick={handleClear}>Clear</button>
     </div>
   );
 };
 
 export default Mailbox;
+
+
 
