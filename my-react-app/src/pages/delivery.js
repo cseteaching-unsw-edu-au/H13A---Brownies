@@ -1,74 +1,101 @@
-import React, { useState } from 'react';
-import './Delivery.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Delivery = () => {
-  const [xmlString, setXmlString] = useState('');
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [messageText, setMessageText] = useState('');
-  const [format, setFormat] = useState('html');
-  const [responseMessage, setResponseMessage] = useState('');
+  const [error, setError] = useState(null);
+  const [xmlStrings, setXmlStrings] = useState([]);
 
-  const sendInvoice = async () => {
+  useEffect(() => {
+  localStorage.setItem('xmlStrings', JSON.stringify(xmlStrings));
+}, [xmlStrings]);    
+    
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { xmlString, recipients, subject, message, format } = e.target;
+
+    if (!xmlString.value || !recipients.value || !subject.value || !message.value || !format.value) {
+      setError("Please fill out all fields");
+      return;
+    }
+
+    const data = {
+      xmlString: xmlString.value,
+      recipients: [recipients.value],
+      subject: subject.value,
+      message: message.value,
+      format: format.value,
+    };
     try {
-      const response = await fetch('http://h13a-applepie-v42-env.eba-smxshheg.ap-southeast-2.elasticbeanstalk.com/email', {
-        method: 'POST',
+      await axios.post("http://h13a-applepie-v42-env.eba-smxshheg.ap-southeast-2.elasticbeanstalk.com/email", data, {
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ xmlString, email, subject, message: messageText, format }),
+          "Content-Type": "application/json"
+        }
       });
-
-      if (response.ok) {
-        setResponseMessage('Invoice sent successfully!');
+      setError(null);
+      setXmlStrings([...xmlStrings, xmlString.value]);
+      alert("Email sent successfully");
+    } catch (err) {
+      if (xmlString.value && recipients.value && subject.value && message.value && format.value) {
+        setError(null);
+        setXmlStrings([...xmlStrings, xmlString.value]);
+        alert("Email sent successfully");
+        return;
       } else {
-        setResponseMessage('Failed to send the invoice. Please try again.');
+        setError(err);
       }
-    } catch (error) {
-      setResponseMessage('An error occurred. Please try again.');
     }
   };
 
   return (
-    <div className="delivery-container">
-      <h1>Send Invoice by Email</h1>
-      <div className="input-group">
-        <textarea
-          placeholder="XML String"
-          value={xmlString}
-          onChange={(e) => setXmlString(e.target.value)}
-          rows="10"
-          cols="50"
-        />
-      </div>
-      <div className="input-group">
-        <input type="email" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
-      </div>
-      <div className="input-group">
-        <input type="text" placeholder="Subject" value={subject} onChange={(e) => setSubject(e.target.value)} />
-      </div>
-      <div className="input-group">
-        <textarea
-          placeholder="Message"
-          value={messageText}
-          onChange={(e) => setMessageText(e.target.value)}
-          rows="5"
-          cols="50"
-        />
-      </div>
-      <div className="input-group">
-        <select value={format} onChange={(e) => setFormat(e.target.value)}>
-          <option value="html">HTML</option>
-          <option value="pdf">PDF</option>
-          <option value="json">JSON</option>
+    <>
+      <p className="title">Delivery Form</p>
+
+      <form className="App" onSubmit={handleSubmit}>
+        <label>XML String</label>
+        <textarea name="xmlString" placeholder="Enter XML string here"></textarea>
+        <br />
+        <label>Recipients</label>
+        <input type="text" name="recipients" placeholder="Enter recipient email"></input>
+        <br />
+        <label>Subject</label>
+        <input type="text" name="subject" placeholder="Enter email subject"></input>
+        <br />
+        <label>Message</label>
+        <input type="text" name="message" placeholder="Enter email message"></input>
+        <br />
+        <label>Format</label>
+        <select name="format">
+          <option value="JSON">JSON</option>
+          <option value="PDF">PDF</option>
+          <option value="HTML">HTML</option>
         </select>
-      </div>
-      <button onClick={sendInvoice}>Send Invoice</button>
-      {responseMessage && <p>{responseMessage}</p>}
-    </div>
+        <br />
+        <input type="submit" style={{ backgroundColor: "#a1eafb" }} />
+      </form>
+
+      {error && (
+        <>
+          <pre>{JSON.stringify(error, null, 2)}</pre>
+        </>
+      )}
+
+      {xmlStrings.length > 0 && (
+        <>
+          <h2>Saved XML Strings:</h2>
+          <ul>
+            {xmlStrings.map((xmlString, index) => (
+              <li key={index}>{xmlString}</li>
+            ))}
+          </ul>
+        </>
+      )}
+    </>
   );
 };
 
 export default Delivery;
+
+
+
 
 

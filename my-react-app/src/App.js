@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages';
 import Delivery from './pages/delivery';
 import Mailbox from './pages/mailbox';
 import Login from './pages/loginpage';
@@ -25,13 +24,11 @@ return (
     <Router>
     <Navbar />
     <Routes>
-        <Route path='/' exact element={<Home />} />
-        <Route path='/home' exact element={<Home />} />
+        <Route path='/' exact element={<Registration />} />
         <Route path='/delivery' element={<Delivery />} />
         <Route path='/mailbox' element={<Mailbox />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Registration />} />
-        <Route path='/notifications' element={<Notifications />} />
         <Route path='/signout' element={<SignOut />} />
     </Routes>
     </Router>
